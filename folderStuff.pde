@@ -50,16 +50,13 @@ void readDataLineFromFile(){
     zeroDataLines();
     //
   } else {
-    //        println(dataLine);
 
    readDataLine = trim(readDataLine);               // trim the \n off the end
    if(readDataLine.charAt(0) == '%'){
      println(readDataLine);
      return;
    }
-   String[] s = splitTokens(readDataLine, ","); // inData, ", ");
-   // char token = readDataLine.charAt(0);
-   // readDataLine = readDataLine.substring(1);        // cut off the leading 'S' or other
+   String[] s = splitTokens(readDataLine, ",");
    Sensor = int(s[0]);
 
    int _bpm = int(s[1]);

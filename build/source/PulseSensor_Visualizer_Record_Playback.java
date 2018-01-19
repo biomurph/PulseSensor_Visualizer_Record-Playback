@@ -120,9 +120,9 @@ if(dataSourceFound){
   noStroke();
   drawDataWindows();
   if(readingFromFile && onAir){
-    if(frameCount%2 == 0){
+    // if(frameCount%2 == 0){
       readDataLineFromFile();
-    }
+    // }
   }
   drawPulseWaveform();
   drawBPMwaveform();

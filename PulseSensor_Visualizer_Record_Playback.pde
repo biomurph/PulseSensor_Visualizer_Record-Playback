@@ -96,47 +96,45 @@ void setup() {
 }
 
 void draw() {
-if(dataSourceFound){
-  // ONLY RUN THE VISUALIZER AFTER THE PORT IS CONNECTED
-  background(0);
-  noStroke();
-  drawDataWindows();
-  if(readingFromFile && onAir){
-    if(frameCount%2 == 0){
-      readDataLineFromFile();
-    }
-  }
-  drawPulseWaveform();
-  drawBPMwaveform();
-  drawHeart();
-// PRINT THE DATA AND VARIABLE VALUES
-  fill(eggshell);                                       // get ready to print text
-  text("Pulse Sensor Amped Visualizer v1.6.0",245,30);    // tell them what you are
-  text("IBI " + IBI + "mS",600,585);                    // print the time between heartbeats in mS
-  text(BPM + " BPM",600,200);                           // print the Beats Per Minute
-  text("Pulse Window Scale " + nf(zoom,1,2), 150, 585); // show the current scale of Pulse Window
-
-//  DO THE SCROLLBAR THINGS
-  scaleBar.update (mouseX, mouseY);
-  scaleBar.display();
-
-} else { // SCAN BUTTONS TO FIND THE SERIAL PORT
-
-  autoScanPorts();
-
-  if(refreshPorts){
-    refreshPorts = false;
+  if(dataSourceFound){
+    // ONLY RUN THE VISUALIZER AFTER THE PORT IS CONNECTED
+    background(0);
+    noStroke();
     drawDataWindows();
-    // drawHeart();
-    listAvailablePorts();
-  }
+    if(readingFromFile && onAir){
+        readDataLineFromFile();
+    }
+    drawPulseWaveform();
+    drawBPMwaveform();
+    drawHeart();
+  // PRINT THE DATA AND VARIABLE VALUES
+    fill(eggshell);                                       // get ready to print text
+    text("Pulse Sensor Amped Visualizer v1.6.0",245,30);    // tell them what you are
+    text("IBI " + IBI + "mS",600,585);                    // print the time between heartbeats in mS
+    text(BPM + " BPM",600,200);                           // print the Beats Per Minute
+    text("Pulse Window Scale " + nf(zoom,1,2), 150, 585); // show the current scale of Pulse Window
 
-  for(int i=0; i<numPorts+1; i++){
-    button[i].overRadio(mouseX,mouseY);
-    button[i].displayRadio();
-  }
+  //  DO THE SCROLLBAR THINGS
+    scaleBar.update (mouseX, mouseY);
+    scaleBar.display();
 
-}
+  } else { // SCAN RADIO BUTTONS TO FIND THE SERIAL PORT
+
+    autoScanPorts();
+
+    if(refreshPorts){
+      refreshPorts = false;
+      drawDataWindows();
+      drawHeart();
+      listAvailablePorts();
+    }
+
+    for(int i=0; i<numPorts+1; i++){
+      button[i].overRadio(mouseX,mouseY);
+      button[i].displayRadio();
+    }
+
+  }
 
 }  // end of draw loop
 
@@ -177,9 +175,8 @@ void drawBPMwaveform(){
    for (int i=0; i<rate.length-1; i++){
      rate[i] = rate[i+1];                  // shift the bpm Y coordinates over one pixel to the left
    }
-// then limit and scale the BPM value
-   // BPM = min(BPM,200);                     // limit the highest BPM value to 200
-   BPM = constrain(BPM,0,200);
+ // then limit and scale the BPM value
+   BPM = constrain(BPM,0,200);            // limit the highest BPM value to 200
    float dummy = map(BPM,0.0,200.0,555.0,215.0);   // map it to the heart rate window Y
    rate[rate.length-1] = int(dummy);       // set the rightmost pixel to the new data point value
  }
