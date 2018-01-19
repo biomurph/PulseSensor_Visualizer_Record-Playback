@@ -102,7 +102,7 @@ if(dataSourceFound){
   noStroke();
   drawDataWindows();
   if(readingFromFile && onAir){
-    if(frameCount%3 == 0){
+    if(frameCount%2 == 0){
       readDataLineFromFile();
     }
   }

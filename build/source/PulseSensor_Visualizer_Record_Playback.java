@@ -120,7 +120,7 @@ if(dataSourceFound){
   noStroke();
   drawDataWindows();
   if(readingFromFile && onAir){
-    if(frameCount%3 == 0){
+    if(frameCount%2 == 0){
       readDataLineFromFile();
     }
   }
@@ -407,7 +407,7 @@ public void mousePressed(){
         }else{
           println("selected to read a file");
           selectInput("Select a folder to process:", "folderSelected");
-          frameRate(150);
+          frameRate(50);
         }
       }
     }
