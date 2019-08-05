@@ -61,6 +61,7 @@ boolean writingToOpenFile = false;
 File playbackFile;
 int collumn = 0;
 int b = 0;
+long lineCounter = 0;
 
 
 void setup() {

@@ -4,7 +4,7 @@ void mousePressed(){
   if(!dataSourceFound){
     for(int i=0; i<=numPorts; i++){
       if(button[i].pressRadio(mouseX,mouseY)){
-        if(i < numPorts){ 
+        if(i < numPorts){
           try{
             port = new Serial(this, Serial.list()[i], 115200);  // make sure Arduino is talking serial at this baud rate
             delay(500);
@@ -60,6 +60,9 @@ void keyPressed(){
        dataSourceFound = true;
      }
      break;
+	 case ' ':
+	 		println("line " + lineCounter);
+	 		break;
    default:
      break;
  }

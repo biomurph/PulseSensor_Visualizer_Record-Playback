@@ -16,13 +16,12 @@ void folderSelected(File selection) {
 }
 
 void createFile(){
-   logFileName = "PulseSensor Data/PS_"+month()+"-"+day()+"_"+hour()+"-"+minute()+".csv";
+   logFileName = "PulseSensor Data/PS_"+month()+"-"+day()+"_"+year()+"_"+hour()+"-"+minute()+".csv";
    dataWriter = createWriter(logFileName);
-   dataWriter.println("%Pulse Sensor Data Log " + month()+"/"+day()+" "+hour()+":"+minute());
+   dataWriter.println("%Pulse Sensor Hummingbird Data Log " + month()+"/"+day()+" "+hour()+":"+minute());
    dataWriter.println("%https://github.com/biomurph/PulseSensor_Visualizer_Record-Playback");
    dataWriter.println("%Data formatted for playback in Processing Visualizer");
-   dataWriter.println("%Sample Rate 500Hz");
-   dataWriter.println("%comma separated values");
+   dataWriter.println("%Comma separated values");
    dataWriter.println("%Signal, BPM, IBI");
 }
 
@@ -48,14 +47,16 @@ void readDataLineFromFile(){
     dataSourceFound = false;
     refreshPorts = true;
     zeroDataLines();
+		lineCounter = 0;
     //
   } else {
-
+		lineCounter++;
    readDataLine = trim(readDataLine);               // trim the \n off the end
    if(readDataLine.charAt(0) == '%'){
      println(readDataLine);
      return;
    }
+
    String[] s = splitTokens(readDataLine, ",");
    Sensor = int(s[0]);
 
